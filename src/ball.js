@@ -17,9 +17,16 @@ export default class Ball {
     this.pocketed = false;
     this.getPosition.bind(this);
     this.setColor.bind(this);
+    this.getVelocity.bind(this);
   }
 
   getPosition() {
+    return {
+      x: this.position.x,
+      y: this.position.y
+    };
+  }
+  getVelocity() {
     return {
       x: this.position.x,
       y: this.position.y
@@ -37,6 +44,8 @@ export default class Ball {
 
   update() {
     this.position = Vector.add(this.position, this.velocity);
+    if(this.position.x < 15 || this.position.x > 745) this.velocity.x *= -1;
+    if(this.position.y < 15 || this.position.y > 345) this.velocity.y *= -1;
   }
 
   render(ctx) {
